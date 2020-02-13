@@ -12,23 +12,8 @@ public class Main {
     private static int[][] board = new int[horizontalSize][verticalSize];
 
     public static void main(String[] args) {
-//        placeOfShip();
-//        game();
-
-
-    }
-
-    private static void shootAnalyzer(int horizontalShot, int verticalShot){
-        if(board[horizontalShot][verticalShot] == 4){
-            System.out.println("Strike the Ship");
-            board[horizontalShot][verticalShot] = 9;
-            sumOfHit++;
-        }else if(board[horizontalShot][verticalShot] == 9){
-            System.out.println("You Shot in this place");
-        }else{
-            System.out.println("Try Again!");
-            board[horizontalShot][verticalShot] = 9;
-        }
+        placeOfShip();
+        game();
     }
 
     private static void game(){
@@ -38,11 +23,24 @@ public class Main {
             System.out.println("Please fire a shot !!!");
             System.out.println("Horizontal point (0-9): ");
             int firstShoot = scanner.nextInt();
-            System.out.println("Vertical poin (0-9): ");
+            System.out.println("Vertical point (0-9): ");
             int secondShot = scanner.nextInt();
             shootAnalyzer(firstShoot,secondShot);
         }while (sumOfHit != 4);
-        System.out.println("Congratulation you destroy all ships!!");
+        System.out.println("Congratulation you destroyed all ships!!");
+    }
+
+    private static void shootAnalyzer(int horizontalShot, int verticalShot){
+        if(board[horizontalShot][verticalShot] == 4){
+            System.out.println("Strike the Ship");
+            board[horizontalShot][verticalShot] = 9;
+            sumOfHit++;
+        }else if(board[horizontalShot][verticalShot] == 9){
+            System.out.println("You have shot in this place");
+        }else{
+            System.out.println("Try Again!");
+            board[horizontalShot][verticalShot] = 9;
+        }
     }
 
     private static void placeOfShip(){
@@ -62,7 +60,6 @@ public class Main {
 
     }
 
-
     private static int[] buildShipStartPointGenerator(){
         int horizontal = randomGenerator.nextInt(horizontalSize);
         int vertical = randomGenerator.nextInt(verticalSize);
@@ -72,7 +69,7 @@ public class Main {
         return startPoint;
     }
 
-    private int directionGenerator(){
+    private static int directionGenerator(){
         ArrayList directionList = new ArrayList();
         directionList.add(0,"up");
         directionList.add(1,"down");
@@ -82,5 +79,4 @@ public class Main {
         int direction = randomGenerator.nextInt(directionList.size());
         return direction;
     }
-
 }
