@@ -16,9 +16,10 @@ public class App {
     private static int[][] board = new int[verticalSize][horizontalSize];
 
     public static void main(String[] args) {
-        shipBuilder(startPoint(),3);
-        game();
-
+        //int[] startPoint = {6,6};
+        shipBuilder(startPoint(),4);
+//        game();
+        showBoard();
     }
 
     private static void game() {

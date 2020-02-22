@@ -69,14 +69,14 @@ public class LockFieldAroundShip {
     protected static void onRightFieldUp(int[][] board, int[] startPoint, int shipSize) {
         //Fill sectors over the ship
         for (int i = 0; i < shipSize; i++) {
-            board[startPoint[0] - 1][startPoint[1] - i] = 8;
+            board[startPoint[0] - 1][startPoint[1] + i] = 8;
         }
     }
 
     protected static void onRightFieldDown(int[][] board, int[] startPoint, int shipSize) {
         //Fill sectors under the ship
         for (int i = 0; i < shipSize; i++) {
-            board[startPoint[0] + 1][startPoint[1] - i] = 8;
+            board[startPoint[0] + 1][startPoint[1] + i] = 8;
         }
     }
 
