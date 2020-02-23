@@ -1,24 +1,46 @@
 package pl.biku.battleship;
 
+import static pl.biku.battleship.Game.shipBuilder;
 
 public class FourMastedShipBuilder {
-    protected static void buildFourMastedShip(int[][] board, int[] startPoint, int shipSize) {
-        int direction = App.buildDirection();
-        System.out.println("Directio: " + direction);
-        System.out.println(startPoint[0] + " " + startPoint[1]);
+    private static int verticalSize = 10;
+
+    public static int getVerticalSize() {
+        return verticalSize;
+    }
+
+    public static int getHorizontalSize() {
+        return horizontalSize;
+    }
+
+    public static int[][] getBoard() {
+        return board;
+    }
+
+    private static int horizontalSize = 10;
+    private static int[][] board = new int[verticalSize][horizontalSize];
+
+    protected static void buildFourMastedShip(int[] startPoint, int shipSize) {
+
+        int direction = RandomGenerator.buildDirection();
+
+        //TODO: Delete
+        System.out.println("Direction: " + direction);
+        System.out.println("[0]: " + startPoint[0] + " " + "[1]: " + startPoint[1]);
+
 
         if (direction == 0) {                                                                   // 0 = left
-            buildLeftShip(board, startPoint, shipSize);
+            buildLeftShip(startPoint, shipSize);
         } else if (direction == 1) {                                                            // 1 = right
-            buildRightlShip(board, startPoint, shipSize);
+            buildRightShip(startPoint, shipSize);
         } else if (direction == 2) {                                                            // 2 = up
-            buildUpShip(board, startPoint, shipSize);
+            buildUpShip(startPoint, shipSize);
         } else if (direction == 3) {                                                            // 3 = down
-            buildDownShip(board, startPoint, shipSize);
+            buildDownShip(startPoint, shipSize);
         }
     }
 
-    private static void buildLeftShip(int[][] board, int[] startPoint, int shipSize) {
+    private static void buildLeftShip(int[] startPoint, int shipSize) {
         if (startPoint[1] - (shipSize - 1) >= 0) {
             for (int i = 0; i < shipSize; i++) {
                 board[startPoint[0]][startPoint[1] - i] = 4;
@@ -91,13 +113,14 @@ public class FourMastedShipBuilder {
                 LockFieldAroundShip.onLeftFieldLeft(board, startPoint, shipSize);
                 LockFieldAroundShip.onLeftFieldLeftUp(board, startPoint, shipSize);
             }
-
+            //TODO: Delete
+            showBoard();
         } else {
-            App.shipBuilder(startPoint, shipSize);
+            shipBuilder(startPoint, shipSize);
         }
     }
 
-    private static void buildRightlShip(int[][] board, int[] startPoint, int shipSize) {
+    private static void buildRightShip(int[] startPoint, int shipSize) {
         if (startPoint[1] + (shipSize - 1) <= (board.length - 1)) {
             for (int i = 0; i < shipSize; i++) {
                 board[startPoint[0]][startPoint[1] + i] = 4;
@@ -141,7 +164,7 @@ public class FourMastedShipBuilder {
                 LockFieldAroundShip.onRightFieldRight(board, startPoint, shipSize);
                 LockFieldAroundShip.onRightFieldRightUp(board, startPoint, shipSize);
                 LockFieldAroundShip.onRightFieldRightDown(board, startPoint, shipSize);
-            } else if ((startPoint[1] + (shipSize-1)) == (board.length - 1) && startPoint[0] > 0 &&
+            } else if ((startPoint[1] + (shipSize - 1)) == (board.length - 1) && startPoint[0] > 0 &&
                     startPoint[0] < (board.length - 1)) {
                 // On the right without 0 and 9 corners
                 LockFieldAroundShip.onRightFieldUp(board, startPoint, shipSize);
@@ -171,14 +194,15 @@ public class FourMastedShipBuilder {
                 LockFieldAroundShip.onRightFieldLeft(board, startPoint, shipSize);
                 LockFieldAroundShip.onRightFieldLeftUp(board, startPoint);
             }
+            //TODO: Delete
+            showBoard();
 
         } else {
-            App.shipBuilder(startPoint, shipSize);
+            shipBuilder(startPoint, shipSize);
         }
-
     }
 
-    private static void buildUpShip(int[][] board, int[] startPoint, int shipSize) {
+    private static void buildUpShip(int[] startPoint, int shipSize) {
         if (startPoint[0] - (shipSize - 1) >= 0) {
             for (int i = 0; i < shipSize; i++) {
                 board[startPoint[0] - i][startPoint[1]] = 4;
@@ -251,13 +275,15 @@ public class FourMastedShipBuilder {
                 LockFieldAroundShip.onOverFieldLeft(board, startPoint, shipSize);
                 LockFieldAroundShip.onOverFieldLeftUp(board, startPoint, shipSize);
             }
+            //TODO: Delete
+            showBoard();
         } else {
-            App.shipBuilder(startPoint, shipSize);
+            shipBuilder(startPoint, shipSize);
         }
     }
 
-    private static void buildDownShip(int[][] board, int[] startPoint, int shipSize) {
 
+    private static void buildDownShip(int[] startPoint, int shipSize) {
 
         if (startPoint[0] + (shipSize - 1) <= (board.length - 1)) {
             for (int i = 0; i < shipSize; i++) {
@@ -330,8 +356,21 @@ public class FourMastedShipBuilder {
                 LockFieldAroundShip.onDownFieldLeft(board, startPoint, shipSize);
                 LockFieldAroundShip.onDownFieldLeftUp(board, startPoint);
             }
+            //TODO: Delete
+            showBoard();
         } else {
-            App.shipBuilder(startPoint, shipSize);
+            shipBuilder(startPoint, shipSize);
+        }
+
+    }
+
+    //TODO: Delete
+    protected static void showBoard() {
+        for (int i = 0; i < getBoard().length; i++) {
+            System.out.println("");
+            for (int j = 0; j < getBoard()[i].length; j++) {
+                System.out.print(getBoard()[i][j] + "  ");
+            }
         }
     }
 
